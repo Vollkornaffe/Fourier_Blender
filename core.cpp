@@ -37,26 +37,25 @@ struct Data {
 
         scale = V3::Ones();
 
-        location = V3::Zero();
-
-        /*
-        if (r > 0 && r % 3 == 0) {
-          location = Eigen::Quaternion<double>(rotations_s[r-3][f]) * V3::UnitX();
+        if (r > 0) {
+          location = Eigen::Quaternion<double>(
+              rotations_s[r-1][f][0],
+              rotations_s[r-1][f][1],
+              rotations_s[r-1][f][2],
+              rotations_s[r-1][f][3]
+          ) * V3::UnitX();
+          location += locations_s[r-1][f];
         } else {
           location = V3::Zero();
         }
-        */
 
+        V2 rotA(sin(rd*5.0), cos(rd*5.0));
+        V2 rotB(-sin(fd+PI), cos(fd+PI));
 
-        V2 rotA(sin(fa*rd*2.0), cos(fa*rd*10.0));
-        V2 rotB(sin(fa + PI), cos(fa + PI));
+        rotA *= sin(fd*rd*rd*50.0);
+        rotB *= cos(fd*rd*rd*50.0);
 
-        rotA *= sin(ra);
-        rotB *= cos(ra);
-
-        rotation = V4(
-          rotA.x(), rotA.y(),
-          rotB.x(), rotB.y());
+        rotation = V4(rotA.x(), rotA.y(), rotB.x(), rotB.y());
       }
     }
   }
