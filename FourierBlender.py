@@ -1,8 +1,13 @@
 import bpy
 import math
 
-from FourierBlender_addArrow import *
-from FourierBlender_interface import *
+from importlib import reload
+
+import FourierBlender_helper
+import FourierBlender_interface
+
+reload(FourierBlender_helper)
+reload(FourierBlender_interface)
 
 # clean up from previous runs
 for obj in bpy.data.objects:
@@ -22,10 +27,10 @@ template_mesh = bpy.data.meshes["template_mesh"]
 num_obj = 10
 num_frames = 100
 
-fourierBlender = FourierBlender(num_obj, num_frames)
+fourierBlender = FourierBlender_interface.FourierBlender(num_obj, num_frames)
 
 for i in range(0, num_obj):
-    addArrow(num_frames, template_mesh, str(i),\
+    FourierBlender_helper.addArrow(num_frames, template_mesh, str(i),\
             fourierBlender.scales(i),\
             fourierBlender.locations(i),\
             fourierBlender.rotations(i))

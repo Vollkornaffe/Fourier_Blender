@@ -36,9 +36,19 @@ struct Data {
         auto & rotation = rotations[f];
 
         scale = V3::Ones();
+
         location = V3::Zero();
 
-        V2 rotA(sin(fa*rd*10.0), cos(fa*rd*10.0));
+        /*
+        if (r > 0 && r % 3 == 0) {
+          location = Eigen::Quaternion<double>(rotations_s[r-3][f]) * V3::UnitX();
+        } else {
+          location = V3::Zero();
+        }
+        */
+
+
+        V2 rotA(sin(fa*rd*2.0), cos(fa*rd*10.0));
         V2 rotB(sin(fa + PI), cos(fa + PI));
 
         rotA *= sin(ra);
