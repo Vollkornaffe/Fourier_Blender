@@ -2,7 +2,7 @@ from ctypes import cdll, c_double, c_void_p, c_size_t, POINTER, c_int
 
 lib = cdll.LoadLibrary('@CMAKE_BINARY_DIR@/libFourierBlender.so.@RELOAD_COUNTER@')
 
-lib.construct.argtypes = [c_size_t, c_size_t]
+lib.construct.argtypes = [c_size_t, c_size_t, c_double]
 lib.construct.restype = c_void_p
 
 lib.get_scales.argtypes = [c_void_p, c_size_t]
@@ -15,8 +15,8 @@ lib.get_rotations.argtypes = [c_void_p, c_size_t]
 lib.get_rotations.restype = POINTER(c_double * 4)
 
 class FourierBlender(object):
-    def __init__(self, resolution, num_frames):
-        self.obj = lib.construct(resolution, num_frames)
+    def __init__(self, resolution, num_frames, v):
+        self.obj = lib.construct(resolution, num_frames, v)
 
     def scales(self, i):
         return lib.get_scales(self.obj, i)
