@@ -17,16 +17,15 @@ endif()
 message("Reload counter at ${RELOAD_COUNTER}")
 set_target_properties(FourierBlender PROPERTIES SUFFIX ".so.${RELOAD_COUNTER}")
 
-set(pydest "NOT_SET" CACHE PATH "Target directory for the python modules, e.g. ~/blender-2.80/2.80/python/lib/python3.7")
-
-if (pydest STREQUAL "NOT_SET")
-  message( SEND_ERROR "Need to specify the pydest" )
-endif()
-
-configure_file(FourierBlender_interface.py.in FourierBlender_interface.py @ONLY)
+configure_file(FourierBlender.py.in FourierBlender.py @ONLY)
+configure_file(FourierBlender_path.py.in FourierBlender_path.py @ONLY)
 
 install(FILES
-  ${CMAKE_BINARY_DIR}/FourierBlender_interface.py
-  ${CMAKE_SOURCE_DIR}/FourierBlender_helper.py
-  DESTINATION ${pydest}
+  ${CMAKE_SOURCE_DIR}/FourierBlender_blender.py
+  ${CMAKE_SOURCE_DIR}/FourierBlender_interface.py
+  ${CMAKE_BINARY_DIR}/FourierBlender_path.py
+  ${CMAKE_BINARY_DIR}/FourierBlender.py
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/FourierBlender
 )
+install(TARGETS FourierBlender
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/FourierBlender)

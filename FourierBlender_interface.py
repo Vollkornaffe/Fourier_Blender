@@ -1,6 +1,8 @@
+import FourierBlender_path
+
 from ctypes import cdll, c_double, c_void_p, c_size_t, POINTER, c_int
 
-lib = cdll.LoadLibrary('@CMAKE_BINARY_DIR@/libFourierBlender.so.@RELOAD_COUNTER@')
+lib = cdll.LoadLibrary(FourierBlender_path.binary_path)
 
 lib.construct.argtypes = [c_size_t, c_size_t, c_double]
 lib.construct.restype = c_void_p

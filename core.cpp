@@ -187,8 +187,8 @@ struct BlenderData {
         V3 add_offset = qf.get_term_as_point(o, x);
 
         scales_s[o][f][0] = add_offset.norm();
-        scales_s[o][f][1] = add_offset.norm();
-        scales_s[o][f][2] = add_offset.norm();
+        scales_s[o][f][1] = 1.0 + add_offset.norm()/10.0;
+        scales_s[o][f][2] = 1.0 + add_offset.norm()/10.0;
 
         Q to_offset = Q::FromTwoVectors(V3::UnitX(), add_offset);
 

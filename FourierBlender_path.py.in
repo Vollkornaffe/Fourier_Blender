@@ -1,0 +1,2 @@
+binary_path = '@CMAKE_BINARY_DIR@/libFourierBlender.so.@RELOAD_COUNTER@'
+print(binary_path)
